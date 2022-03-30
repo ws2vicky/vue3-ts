@@ -1,10 +1,11 @@
 <template>
-  <div>我是首页</div>
+  <div></div>
 </template>
+
 <script lang="ts">
 import { defineComponent } from 'vue'
+
 export default defineComponent({
-  name: 'MainV',
   setup() {
     return {}
   }
