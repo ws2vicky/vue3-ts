@@ -1,8 +1,8 @@
 <template>
   <div class="login-panel">
     <h1 class="title">后台管理系统</h1>
-    <el-tabs type="border-card" :stretch="true">
-      <el-tab-pane>
+    <el-tabs v-model="currentRef" type="border-card" :stretch="true">
+      <el-tab-pane name="account">
         <template #label>
           <span class="custom-tabs-label">
             <el-icon><user-filled /></el-icon>
@@ -11,14 +11,14 @@
         </template>
         <LoginAccount ref="accountRef" />
       </el-tab-pane>
-      <el-tab-pane>
+      <el-tab-pane name="phone">
         <template #label>
           <span class="custom-tabs-label">
             <el-icon><Iphone /></el-icon>
             <span>手机登录</span>
           </span>
         </template>
-        <LoginPhone />
+        <LoginPhone ref="phoneRef" />
       </el-tab-pane>
     </el-tabs>
     <div class="account-control">
@@ -42,13 +42,26 @@ export default defineComponent({
   setup() {
     const iskeepPassword = ref(true)
     const accountRef = ref<InstanceType<typeof LoginAccount>>()
+    const phoneRef = ref<InstanceType<typeof LoginPhone>>()
+    // 绑定选项卡
+    const currentRef = ref('account')
     const HandleLoginClick = () => {
-      accountRef.value?.loginAction(iskeepPassword.value)
+      if (currentRef.value === 'account') {
+        accountRef.value?.loginAction(iskeepPassword.value)
+      } else {
+        ElMessage({
+          message: '未实现手机登录功能.',
+          grouping: true,
+          type: 'success'
+        })
+      }
     }
     return {
       iskeepPassword,
       HandleLoginClick,
-      accountRef
+      accountRef,
+      phoneRef,
+      currentRef
     }
   }
 })

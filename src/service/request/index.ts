@@ -46,7 +46,7 @@ class WSRequest {
           if (res.data.returnCode === '-1001') {
             console.log('请求失败')
           } else {
-            this.Loading!.close()
+            this.Loading?.close()
             const data = res.data
             return data
           }
