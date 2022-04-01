@@ -4,8 +4,7 @@ import 'normalize.css'
 import './assets/css/index.less'
 import router from './router'
 import store from './store'
-// import './service/axios_demo'
-import wsRequest from './service'
+
 const app = createApp(App)
 app.use(router)
 app.use(store)

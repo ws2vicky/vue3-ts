@@ -1,4 +1,3 @@
-// import { ElLoading } from 'element-plus'
 import axios, { AxiosInstance } from 'axios'
 import { WSRequestInterceptors, WSRequestConfig } from './type'
 import { LoadingInstance } from 'element-plus/lib/components/loading/src/loading'
@@ -27,7 +26,7 @@ class WSRequest {
           this.Loading = ElLoading.service({
             fullscreen: true,
             lock: true,
-            text: 'Loading',
+            text: 'Loading请求中请等待',
             spinner: 'el-icon-loading',
             background: 'rgba(0, 0, 0, 0.7)'
           })
@@ -43,9 +42,11 @@ class WSRequest {
       this.instance.interceptors.response.use(
         (res) => {
           console.log('类响应拦截')
-          if (res.data.returnCode === '-1001') {
+          if (res.data.returnCode === '401') {
             console.log('请求失败')
           } else {
+            console.log('11111')
+
             this.Loading?.close()
             const data = res.data
             return data

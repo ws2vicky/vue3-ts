@@ -1,18 +1,15 @@
 import WSRequest from './request'
-import { BASE_URL, TIME_OUT } from './request/config'
+import { API_BASE_URL, TIME_OUT } from './request/config'
+//导入工具
+import LocalCache from '../utils/cache'
 let wsREquest = new WSRequest({
-  baseURL: BASE_URL,
+  baseURL: API_BASE_URL,
   timeout: TIME_OUT,
   interceptors: {
     requestInterceptor: (config) => {
-      let token = ''
+      let token = LocalCache.getCatch('token')
       if (token) {
-        // (config.headers as any).Authorization = ''
-        // config.headers = {
-        // }
-        // if (config.headers) {
-        //   config.headers.Authorization = ``
-        // }
+        config.headers!.Authorization = `Bearer ${token}`
         console.log()
       }
       console.log('实例请求拦截')
