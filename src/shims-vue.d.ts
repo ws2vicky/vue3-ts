@@ -7,4 +7,3 @@ declare module '*.vue' {
 declare let $store: any
 declare let ElLoading
 declare let ElMessage
-

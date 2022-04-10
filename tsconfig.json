@@ -42,13 +42,12 @@
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
     "baseUrl": ".",
-    "types": ["webpack-env","element-plus/global"],
+    "types": ["webpack-env", "element-plus/global"],
     "paths": {
       "@/*": ["src/*"],
       "views": ["src/views"]
     },
-    "lib": ["esnext", "dom", "dom.iterable", "scripthost"],
-
+    "lib": ["esnext", "dom", "dom.iterable", "scripthost"]
   },
   "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "tests/**/*.ts", "tests/**/*.tsx"],
   "exclude": ["node_modules"]

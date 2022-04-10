@@ -2,7 +2,7 @@
   <div class="login-account">
     <el-form ref="formRef" :rules="rules" :model="account">
       <el-form-item label="账号" prop="name">
-        <el-input v-model="account.name"></el-input>
+        <el-input v-model="account.name" show-password></el-input>
       </el-form-item>
       <el-form-item label="密码" prop="password">
         <el-input v-model="account.password" show-password></el-input>
@@ -16,7 +16,7 @@ import { ElForm } from 'element-plus/lib/components'
 import { defineComponent, reactive, ref } from 'vue'
 import { rules } from '../config/account-config'
 // 导入本地缓存
-import localCache from '../../../utils/cache'
+import localCache from '@/utils/cache'
 // 导入vuex
 import { useStore } from 'vuex'
 
