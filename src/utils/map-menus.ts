@@ -3,6 +3,8 @@ import type { RouteRecordRaw } from 'vue-router'
 
 let firstMenu: any = null
 export function mapMenusToRoutes(userMenus: any[]): RouteRecordRaw[] {
+  console.log(userMenus, '他他他')
+
   const routes: RouteRecordRaw[] = []
   // 1先加载所有路由表
   const allRoutes: RouteRecordRaw[] = []
@@ -21,9 +23,8 @@ export function mapMenusToRoutes(userMenus: any[]): RouteRecordRaw[] {
 
   // 根据菜单注册路由   根据菜单获取需要添加的routes
   const _recurseGetRoute = (menus: any[]) => {
+    console.log(menus, '11111111')
     for (const menu of menus) {
-      console.log(menu, '11111111')
-
       if (menu.type === 2) {
         const route = allRoutes.find((route) => {
           return route.path === menu.url

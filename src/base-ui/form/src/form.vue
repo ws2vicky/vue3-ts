@@ -7,13 +7,18 @@
             <el-form-item :label="item.label" :rules="item.rules" :style="itemStyle">
               <template v-if="item.type === 'input' || item.type === 'password'">
                 <el-input
+                  v-model="formData[`${item.field}`]"
                   :placeholder="item.palaceholder"
                   :show-password="item.type === 'password'"
                 >
                 </el-input>
               </template>
               <template v-else-if="item.type === 'select'">
-                <el-select :placeholder="item.palaceholder" style="width: 100%">
+                <el-select
+                  v-model="formData[`${item.field}`]"
+                  :placeholder="item.palaceholder"
+                  style="width: 100%"
+                >
                   <el-option
                     v-for="option in item.options"
                     :key="option.value"
@@ -23,7 +28,10 @@
                 </el-select>
               </template>
               <template v-else-if="item.type === 'datepicker'">
-                <el-date-picker v-bind="item.otherOptions"></el-date-picker
+                <el-date-picker
+                  v-bind="item.otherOptions"
+                  v-model="formData[`${item.field}`]"
+                ></el-date-picker
               ></template>
             </el-form-item>
           </el-col>
@@ -33,12 +41,17 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, PropType } from 'vue'
+import { computed } from '@vue/reactivity'
+import { defineComponent, PropType, ref } from 'vue'
 import { IFormItem } from '../types/index'
 
 export default defineComponent({
   name: 'FoRm',
   props: {
+    modelValue: {
+      type: Object,
+      required: true
+    },
     formItems: {
       type: Array as PropType<IFormItem[]>,
       default: () => []
@@ -54,7 +67,7 @@ export default defineComponent({
     colLayout: {
       type: Object,
       default: () => ({
-        xl: 6, //1920
+        xl: 6,
         lg: 8,
         md: 12,
         sm: 24,
@@ -62,8 +75,20 @@ export default defineComponent({
       })
     }
   },
-  setup() {
-    return {}
+  emits: ['update:modelValue'],
+  setup(props, { emit }) {
+    // const formData = computed({
+    //   get: () => {
+    //     console.log('get执行')
+    //     return props.modelValue
+    //   },
+    //   set: (newValue) => {
+    //     emit('update:modelValue', newValue)
+    //     console.log('set执行')
+    //   }
+    // })
+    const formData = ref({ ...props.modelValue })
+    return { formData }
   }
 })
 </script>

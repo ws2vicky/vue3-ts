@@ -25,6 +25,8 @@ module.exports = {
     'no-use-before-define': 'off',
     // eslint-plugin-import 的规则
     'import/no-unresolved': 'off',
-    'vue/no-setup-props-destructure': 'off'
+    'vue/no-setup-props-destructure': 'off',
+    'vue/no-mutating-props': 'off',
+    'vue/require-default-prop': 'off'
   }
 }
